@@ -77,6 +77,7 @@ const Map = () => {
   return (
     <MapView
       provider={PROVIDER_DEFAULT}
+      userInterfaceStyle={"light"}
       style={{ width: '100%', height: '100%' }}
       initialRegion={{
         latitude: 32.19592744876891,
@@ -86,7 +87,7 @@ const Map = () => {
       }}
       tintColor='black'
       mapType={Platform.OS === 'ios' ? 'mutedStandard' : 'standard'}
-      // showsPointsOfInterest // not supported on Android
+      showsPointsOfInterest // not supported on Android
       showsUserLocation={true}
     >
       {markers?.map((marker) => (
