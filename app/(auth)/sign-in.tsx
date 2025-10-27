@@ -55,6 +55,7 @@ const SignIn = () => {
           <InputField
             label={'Email'}
             placeholder='Enter your email'
+            placeholderTextColor="#a3a3a3"
             icon={icons.email}
             value={form.email}
             onChangeText={(value) => setForm({ ...form, email: value })}
@@ -62,6 +63,7 @@ const SignIn = () => {
           <InputField
             label={'Password'}
             placeholder='Enter your password'
+            placeholderTextColor="#a3a3a3"
             icon={icons.lock}
             value={form.password}
             onChangeText={(value) => setForm({ ...form, password: value })}

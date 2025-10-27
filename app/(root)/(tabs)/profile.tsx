@@ -29,6 +29,7 @@ const Profile = () => {
           <View className="flex flex-col items-start justify-start w-full">
             <InputField
               label="First name"
+              placeholderTextColor="#a3a3a3"
               placeholder={user?.firstName || "Not Found"}
               containerStyle="w-full"
               inputStyle="p-3.5"
@@ -37,6 +38,7 @@ const Profile = () => {
 
             <InputField
               label="Last name"
+              placeholderTextColor="#a3a3a3"
               placeholder={user?.lastName || "Not Found"}
               containerStyle="w-full"
               inputStyle="p-3.5"
@@ -45,6 +47,7 @@ const Profile = () => {
 
             <InputField
               label="Email"
+              placeholderTextColor="#a3a3a3"
               placeholder={
                 user?.primaryEmailAddress?.emailAddress || "Not Found"
               }
@@ -55,6 +58,7 @@ const Profile = () => {
 
             <InputField
               label="Phone"
+              placeholderTextColor="#a3a3a3"
               placeholder={user?.primaryPhoneNumber?.phoneNumber || "Not Found"}
               containerStyle="w-full"
               inputStyle="p-3.5"

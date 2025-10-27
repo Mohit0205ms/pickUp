@@ -7,6 +7,7 @@ import { useSignUp } from '@clerk/clerk-expo';
 import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Image, ScrollView, Text, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { ReactNativeModal } from 'react-native-modal';
 
 const SignUp = () => {
@@ -97,8 +98,8 @@ const SignUp = () => {
   };
 
   return (
-    <ScrollView className='flex-1 bg-white'>
-      <View className='flex-1 bg0-white'>
+    <KeyboardAwareScrollView enableOnAndroid={true} className='flex flex-1 bg-white'>
+      <View className='flex-1 bg-white'>
         <View>
           <Image source={images.signUpCar} className='z-0 w-full h-[250px]' />
           <Text className='text-2xl text-black font-JakartaSemiBold absolute bottom-5 left-5'>
@@ -109,6 +110,7 @@ const SignUp = () => {
           <InputField
             label={'Name'}
             placeholder='Enter your name'
+            placeholderTextColor="#a3a3a3"
             icon={icons.person}
             value={form.name}
             onChangeText={(value) => setForm({ ...form, name: value })}
@@ -116,6 +118,7 @@ const SignUp = () => {
           <InputField
             label={'Email'}
             placeholder='Enter your email'
+            placeholderTextColor="#a3a3a3"
             icon={icons.email}
             value={form.email}
             onChangeText={(value) => setForm({ ...form, email: value })}
@@ -123,6 +126,7 @@ const SignUp = () => {
           <InputField
             label={'Password'}
             placeholder='Enter your password'
+            placeholderTextColor="#a3a3a3"
             icon={icons.lock}
             value={form.password}
             onChangeText={(value) => setForm({ ...form, password: value })}
@@ -204,7 +208,7 @@ const SignUp = () => {
           </ReactNativeModal>
         </View>
       </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 

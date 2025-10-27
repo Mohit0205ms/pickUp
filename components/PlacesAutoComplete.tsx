@@ -107,6 +107,7 @@ export default function PlacesAutocomplete({
         <TextInput
           style={styles.input}
           placeholder={placeholder}
+          placeholderTextColor="#a3a3a3"
           value={input}
           onChangeText={setInput}
           className='rounded-2xl'
