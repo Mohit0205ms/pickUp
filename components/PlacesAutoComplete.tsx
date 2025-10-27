@@ -1,13 +1,14 @@
 import { icons } from '@/constants';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  View,
-  TextInput,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
   Image,
+  Keyboard,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 // Helper to debounce a value
@@ -76,18 +77,23 @@ export default function PlacesAutocomplete({
 
   const handleSelect = async (pred: Prediction) => {
     try {
+      Keyboard.dismiss();
       const response = await fetch(
-        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pred.place_id}&fields=geometry&key=${apiKey}&sessiontoken=${sessionToken.current}`
+        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${pred.place_id}&fields=geometry&key=${apiKey}&sessiontoken=${sessionToken.current}`,
       );
       const data = await response.json();
       if (data.status === 'OK') {
         const { lat, lng } = data.result.geometry.location;
-        console.log("result of location: ", pred, data);
+        console.log('result of location: ', pred, data);
         setInput(pred.description);
         setPredictions([]);
         onPlaceSelected(pred, data.result);
       } else {
-        console.warn('Failed to fetch place details', data.status, data.error_message);
+        console.warn(
+          'Failed to fetch place details',
+          data.status,
+          data.error_message,
+        );
       }
     } catch (error) {
       console.error('Error fetching place details:', error);
@@ -95,7 +101,11 @@ export default function PlacesAutocomplete({
   };
 
   return (
-    <View style={styles.container} className='rounded-2xl' pointerEvents='box-none'>
+    <View
+      style={styles.container}
+      className='rounded-2xl'
+      pointerEvents='box-none'
+    >
       <View className='flex flex-row w-full items-center rounded-2xl'>
         <View className='justify-center items-center w-6 h-6 p-6 rounded-2xl'>
           <Image
@@ -107,14 +117,15 @@ export default function PlacesAutocomplete({
         <TextInput
           style={styles.input}
           placeholder={placeholder}
-          placeholderTextColor="#a3a3a3"
+          placeholderTextColor='#a3a3a3'
           value={input}
           onChangeText={setInput}
           className='rounded-2xl'
+          onBlur={() => setPredictions([])}
         />
       </View>
       {predictions.length > 0 && (
-        <ScrollView style={styles.dropdown}>
+        <ScrollView style={styles.dropdown} keyboardShouldPersistTaps='always' nestedScrollEnabled={true}>
           {predictions.map((p) => (
             <TouchableOpacity
               key={p.place_id}
@@ -134,8 +145,8 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     zIndex: 10,
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 16,
   },
   input: {
@@ -148,8 +159,8 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fff',
     fontSize: 15,
     flex: 1,
-    alignItems:'center',
-    justifyContent:'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   dropdown: {
     maxHeight: 200,

@@ -14,10 +14,8 @@ const FindRide = () => {
     setUserLocation,
   } = useLocationStore();
 
-
-
   return (
-    <RideLayout title={"Ride"} snapPoints={['85%']}>
+    <RideLayout title={'Ride'} snapPoints={['85%']}>
       <View className='my-3'>
         <Text className='tezt-lg font-JakartaSemiBold mb-3'>From</Text>
         <GoogleTextInput
@@ -25,7 +23,7 @@ const FindRide = () => {
           initialLocation={userAddress!}
           containerStyle='bg-neutral-100'
           textInputBackgroundColor='#f5f5f5'
-          handlePress={(location) => setUserLocation(location) }
+          handlePress={(location) => setUserLocation(location)}
         />
       </View>
       <View className='my-3'>
@@ -35,10 +33,14 @@ const FindRide = () => {
           initialLocation={destinationAddress!}
           containerStyle='bg-neutral-100'
           textInputBackgroundColor='transparent'
-          handlePress={(location) => setUserLocation(location) }
+          handlePress={(location) => setUserLocation(location)}
         />
       </View>
-      <CustomButton title={"Find now"} onPress={() => router.push("/(root)/confirm-ride")} classes='mt-5' />
+      <CustomButton
+        title={'Find now'}
+        onPress={() => router.push('/(root)/confirm-ride')}
+        classes='mt-5'
+      />
     </RideLayout>
   );
 };

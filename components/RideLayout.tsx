@@ -1,8 +1,10 @@
 import { icons } from '@/constants';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { router } from 'expo-router';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { useRef } from 'react';
+import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Map from './Map';
 
 const RideLayout = ({
@@ -14,7 +16,8 @@ const RideLayout = ({
   children: React.ReactNode;
   snapPoints?: string[];
 }) => {
-  // const bottomSheetRef = useRef<BottomSheet>(null);
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const insets = useSafeAreaInsets();
   return (
     <GestureHandlerRootView>
       <View className='flex-1 bg-white'>
@@ -38,11 +41,13 @@ const RideLayout = ({
       </View>
       {/* Bottom Sheet */}
       <BottomSheet
-        keyboardBehavior='extend'
+        ref={bottomSheetRef}
+        keyboardBehavior={Platform.OS === 'ios' ? 'extend' : 'interactive'}
         snapPoints={snapPoints || ['85%']}
         index={0}
+        bottomInset={insets.bottom}
       >
-        <BottomSheetView style={{ flex: 1, padding: 20 }}>
+        <BottomSheetView style={{ flex: 1, padding: 20 }} >
           {children}
         </BottomSheetView>
       </BottomSheet>
